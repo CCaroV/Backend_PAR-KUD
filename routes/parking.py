@@ -25,7 +25,7 @@ def get_parqueaderos():
         cursor = DBconn.cursor()
 
         # Ejecutar el procedimiento almacenado
-        cursor.callproc('PARQUEADERO.PRUEBA_JSON_FU', ())
+        cursor.callproc('PARQUEADERO.MOSTRAR_SUCURSALES_FU', ())
         # print("SELECT * FROM PARQUEADERO.SUCURSAL")
         # cursor.execute("SELECT * FROM PARQUEADERO.SUCURSAL")
         print(cursor)
