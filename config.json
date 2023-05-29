@@ -1,0 +1,5 @@
+{
+  "host": "par-kud.postgres.database.azure.com",
+  "port" : 5432,
+  "database" : "parkud_dbpg"
+}
