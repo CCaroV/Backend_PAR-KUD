@@ -11,9 +11,16 @@ def expire_date(days: int):
 
 
 def write_token(data: dict):
-    token = encode(payload={**data, "exp": expire_date(2)},key=getenv("SECRET"), algorithm="HS256")
-    return token.encode("UTF-8")
+    token = encode(payload={**data, "exp": expire_date(2)}, key=getenv("SECRET"), algorithm="HS256")
+    return verifyEncode(token)
 
+
+def verifyEncode(string):
+    try:
+        encoded = string.encode('utf-8')
+        return encoded
+    except AttributeError:
+        return string
 
 def validate_token(token, output=False):
     try:
@@ -32,5 +39,3 @@ def validate_token(token, output=False):
 
 def get_data(token):
     return decode(token, key=getenv("SECRET"), algorithms=["HS256"])
-
-
