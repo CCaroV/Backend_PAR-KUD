@@ -22,4 +22,4 @@ def test():
 if __name__ == '__main__':
     dataConfig = loadFileConfig()
     print("Server running : " + "http://" + dataConfig["host"] + ":" + str(dataConfig["port"]))
-    app.run(port=80)
+    app.run()
