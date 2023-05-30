@@ -13,8 +13,8 @@ def expire_date(day: int):
 
 
 def write_token(data: dict):
-    ecyptDict = encrypt_dict(data)
-    token = encode(payload={**ecyptDict, "exp": expire_date(1)}, key=getenv("SECRET"), algorithm="HS256")
+    encryptDict = encrypt_dict(data)
+    token = encode(payload={**encryptDict, "exp": expire_date(1)}, key=getenv("SECRET"), algorithm="HS256")
     return verifyEncode(token)
 
 

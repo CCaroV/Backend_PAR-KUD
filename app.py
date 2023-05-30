@@ -1,3 +1,5 @@
+from flask_cors import CORS
+
 from routes.Auth import routes_user_auth
 from routes.parking import routes_parking
 from routes.supAdmin import routes_SUser
@@ -6,7 +8,7 @@ from routes.users import *
 from dotenv import load_dotenv, find_dotenv
 
 app = Flask(__name__)
-cors = CORS(app)
+cors = CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 app.register_blueprint(routes_user)
 app.register_blueprint(routes_user_auth)

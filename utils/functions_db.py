@@ -1,12 +1,10 @@
 import psycopg2
 from flask import Flask, json, Request
-from flask_cors import CORS
 
 from utils.function_jwt import get_data
 from utils.encrypter import decrypt_dict
 
 app = Flask(__name__)
-cors = CORS(app)
 
 
 def loadFileConfig():
