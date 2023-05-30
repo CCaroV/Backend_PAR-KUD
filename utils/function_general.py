@@ -1,7 +1,7 @@
 from flask import jsonify
 from psycopg2._psycopg import connection
 
-from functions_db import cerrarBD
+from utils.functions_db import cerrarBD
 
 
 def requestDB(dbConn: connection, plPsql: str, par: tuple = ()):

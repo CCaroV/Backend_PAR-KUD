@@ -1,6 +1,6 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request
 
-from function_jwt import write_token
+from utils.function_jwt import write_token
 
 routes_token = Blueprint("routes_token", __name__)
 

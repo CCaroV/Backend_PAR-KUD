@@ -1,8 +1,8 @@
 from flask import Blueprint, request, jsonify
 
-from function_general import requestDB
-from function_jwt import write_token, validate_token, get_data
-from functions_db import *
+from utils.function_general import requestDB
+from utils.function_jwt import validate_token
+from utils.functions_db import *
 
 routes_user = Blueprint("routes_user", __name__)
 

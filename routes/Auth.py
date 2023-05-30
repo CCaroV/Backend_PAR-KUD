@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 
-from function_general import requestDB
-from functions_db import conectarBD, cerrarBD
+from utils.function_general import requestDB
+from utils.functions_db import conectarBD
 
 routes_user_auth = Blueprint("routes_user_auth", __name__)
 
