@@ -39,7 +39,7 @@ def get_clienteByid(cliente_id):
         cerrarBD(DBconn)
 
         # Devolver los resultados como respuesta en formato JSON
-        return jsonify(results)
+        return jsonify(results), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -75,7 +75,7 @@ def post_newClaveCliente(emailCliente):
         cerrarBD(DBconn)
 
         # Devolver los resultados como respuesta en formato JSON
-        return jsonify(results)
+        return jsonify(results), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500

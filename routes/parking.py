@@ -50,7 +50,7 @@ def get_marcas():
         cerrarBD(DBconn)
 
         # Devolver los resultados como respuesta en formato JSON
-        return jsonify(results)
+        return jsonify(results), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500

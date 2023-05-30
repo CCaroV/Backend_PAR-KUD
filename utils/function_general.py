@@ -26,4 +26,4 @@ def requestDB(dbConn: connection, plPsql: str, par: tuple = ()):
     # Cerrar el cursor y la conexión
     cursor.close()
     cerrarBD(dbConn)
-    return jsonify(results[0][2])
+    return jsonify(results[0][2]), 200

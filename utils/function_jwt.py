@@ -1,21 +1,20 @@
-from cryptography import fernet
-from flask import jsonify
+from flask import jsonify, json
 from jwt import encode, decode, exceptions
 from os import getenv
 from datetime import datetime, timedelta
 
-from utils.encrypter import encryptData
+from utils.encrypter import encrypt_dict
 
 
-def expire_date(hour: int):
+def expire_date(day: int):
     now = datetime.now()
-    new_date = now + timedelta(hours=hour)
+    new_date = now + timedelta(days=day)
     return new_date
 
 
 def write_token(data: dict):
-    dataEncrypt = encryptData(data)
-    token = encode(payload={**dataEncrypt, "exp": expire_date(1)}, key=getenv("SECRET"), algorithm="HS256")
+    ecyptDict = encrypt_dict(data)
+    token = encode(payload={**ecyptDict, "exp": expire_date(1)}, key=getenv("SECRET"), algorithm="HS256")
     return verifyEncode(token)
 
 
