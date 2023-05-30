@@ -4,14 +4,14 @@ from os import getenv
 from datetime import datetime, timedelta
 
 
-def expire_date(days: int):
+def expire_date(hour: int):
     now = datetime.now()
-    new_date = now + timedelta(days)
+    new_date = now + timedelta(hours=hour)
     return new_date
 
 
 def write_token(data: dict):
-    token = encode(payload={**data, "exp": expire_date(2)}, key=getenv("SECRET"), algorithm="HS256")
+    token = encode(payload={**data, "exp": expire_date(1)}, key=getenv("SECRET"), algorithm="HS256")
     return verifyEncode(token)
 
 
@@ -21,6 +21,7 @@ def verifyEncode(string):
         return encoded
     except AttributeError:
         return string
+
 
 def validate_token(token, output=False):
     try:

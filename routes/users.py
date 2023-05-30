@@ -81,7 +81,7 @@ def post_newClaveCliente(emailCliente):
 
 
 # Función para mostrar los vehículos que un cliente tiene registrados.
-@routes_user.route("/cliente/vehiculos", methods=['GET'])
+@routes_user.route("/cliente/vehiculos", methods=['POST'])
 def get_vehiculos():
     try:
         # parametros = request.json.get('parametros')
