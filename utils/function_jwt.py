@@ -1,17 +1,20 @@
-from flask import jsonify
+from flask import jsonify, json
 from jwt import encode, decode, exceptions
 from os import getenv
 from datetime import datetime, timedelta
 
+from utils.encrypter import encrypt_dict
 
-def expire_date(days: int):
+
+def expire_date(day: int):
     now = datetime.now()
-    new_date = now + timedelta(days)
+    new_date = now + timedelta(days=day)
     return new_date
 
 
 def write_token(data: dict):
-    token = encode(payload={**data, "exp": expire_date(2)}, key=getenv("SECRET"), algorithm="HS256")
+    ecyptDict = encrypt_dict(data)
+    token = encode(payload={**ecyptDict, "exp": expire_date(1)}, key=getenv("SECRET"), algorithm="HS256")
     return verifyEncode(token)
 
 
@@ -21,6 +24,7 @@ def verifyEncode(string):
         return encoded
     except AttributeError:
         return string
+
 
 def validate_token(token, output=False):
     try:
