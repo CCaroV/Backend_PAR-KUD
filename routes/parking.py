@@ -9,7 +9,7 @@ routes_parking = Blueprint("routes_parking", __name__)
 
 @routes_parking.before_request
 def verify_token_middleware():
-    token = request.headers['HTTP_AUTHORIZATION'].split(" ")[1]
+    token = request.headers['AUTHORIZATION'].split(" ")[1]
     validate_token(token)
 
 
