@@ -8,7 +8,9 @@ from routes.users import *
 from dotenv import load_dotenv, find_dotenv
 
 app = Flask(__name__)
-cors = CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
+cors = CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True,
+            headers=['Authorization'],
+            expose_headers='Authorization')
 
 app.register_blueprint(routes_user)
 app.register_blueprint(routes_user_auth)
