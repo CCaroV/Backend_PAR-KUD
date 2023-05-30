@@ -1,3 +1,5 @@
+import base64
+
 from flask import jsonify, json
 from jwt import encode, decode, exceptions
 from os import getenv
@@ -14,7 +16,8 @@ def expire_date(day: int):
 
 def write_token(data: dict):
     encryptDict = encrypt_dict(data)
-    token = encode(payload={**encryptDict, "exp": expire_date(1)}, key=getenv("SECRET"), algorithm="HS256")
+    key = base64.urlsafe_b64encode(str(getenv("SECRET")).encode('utf-8'))
+    token = encode(payload={**encryptDict, "exp": expire_date(1)}, key=key, algorithm="HS256")
     return verifyEncode(token)
 
 
@@ -42,4 +45,5 @@ def validate_token(token, output=False):
 
 
 def get_data(token):
-    return decode(token, key=getenv("SECRET"), algorithms=["HS256"])
+    key = base64.urlsafe_b64encode(str(getenv("SECRET")).encode('utf-8'))
+    return decode(token, key=key, algorithms=["HS256"])
