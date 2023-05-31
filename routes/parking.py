@@ -1,3 +1,5 @@
+import logging
+
 from flask import Blueprint, request, jsonify
 
 from utils.function_general import requestDB
@@ -9,6 +11,7 @@ routes_parking = Blueprint("routes_parking", __name__)
 
 @routes_parking.before_request
 def verify_token_middleware():
+    logging.warning("el authorization es", request.headers['AUTHORIZATION'])
     token = request.headers['AUTHORIZATION'].split(" ")[1]
     validate_token(token)
 
