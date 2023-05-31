@@ -5,7 +5,6 @@ from jwt import encode, decode, exceptions
 from os import getenv
 from datetime import datetime, timedelta
 
-from utils.encrypter import encrypt_dict
 
 
 def expire_date(day: int):
@@ -15,9 +14,9 @@ def expire_date(day: int):
 
 
 def write_token(data: dict):
-    encryptDict = encrypt_dict(data)
+    # encryptDict = encrypt_dict(data)
     key = base64.urlsafe_b64encode(str(getenv("SECRET")).encode('utf-8'))
-    token = encode(payload={**encryptDict, "exp": expire_date(1)}, key=key, algorithm="HS256")
+    token = encode(payload={**data, "exp": expire_date(1)}, key=key, algorithm="HS256")
     return verifyEncode(token)
 
 

@@ -2,7 +2,6 @@ import psycopg2
 from flask import Flask, json, Request
 
 from utils.function_jwt import get_data
-from utils.encrypter import decrypt_dict
 
 app = Flask(__name__)
 
@@ -15,7 +14,7 @@ def loadFileConfig():
 
 def conectarBD(request: Request):
     token = request.headers['Authorization'].split(" ")[1]
-    data = decrypt_dict(get_data(token))
+    data =get_data(token)
     dataConn = loadFileConfig()
     conn = psycopg2.connect(host=dataConn["host"], port=dataConn["port"], database=dataConn["database"],
                             user=data["user"], password=data["password"])
