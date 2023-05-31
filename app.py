@@ -30,4 +30,4 @@ if __name__ == '__main__':
     dataConfig = loadFileConfig()
     print("Server running : " + "http://" + dataConfig["host"] + ":" + str(dataConfig["port"]))
     load_dotenv(find_dotenv())
-    app.run()
+    app.run(host='0.0.0.0', port=80)
