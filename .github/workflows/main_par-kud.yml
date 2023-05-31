@@ -60,4 +60,4 @@ jobs:
         with:
           app-name: 'PAR-KUD'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_06ACA41EFF5349F0BE6CA323AF304321 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_339F6DA81BA047FD94577C342D60990B }}
