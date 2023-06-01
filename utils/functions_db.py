@@ -18,7 +18,7 @@ def loadFileConfig():
 
 def conectarBD(request: Request):
     token = request.headers['Authorization'].split(" ")[1]
-    key = base64.urlsafe_b64encode(str(getenv("SECRET")).encode('utf-8'))
+    key = base64.urlsafe_b64encode("0bImZx-AaHdk7E3Aoa6-FS5BKzkIrTc=".encode("utf-8"))
     data = decrypt_dict(get_data(token),key)
     dataConn = loadFileConfig()
     conn = psycopg2.connect(host=dataConn["host"], port=dataConn["port"], database=dataConn["database"],
