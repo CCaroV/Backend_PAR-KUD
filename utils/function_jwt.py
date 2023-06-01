@@ -15,7 +15,8 @@ def expire_date(day: int):
 
 
 def write_token(data: dict):
-    key = base64.urlsafe_b64encode("0bImZx-AaHdk7E3Aoa6-FS5BKzkIrTc=".encode("utf-8"))
+    key = "NwKyZF848xFHInNmjQfY4U4uKTNGhK2ABqgHvolGhuA="
+    print(key)
     encryptDict = encrypt_dict(data, key)
     token = encode(payload={**encryptDict, "exp": expire_date(1)}, key=key, algorithm="HS256")
     return verifyEncode(token)
@@ -45,5 +46,5 @@ def validate_token(token, output=False):
 
 
 def get_data(token):
-    key = base64.urlsafe_b64encode(str(getenv("SECRET")).encode('utf-8'))
+    key = "NwKyZF848xFHInNmjQfY4U4uKTNGhK2ABqgHvolGhuA="
     return decode(token, key=key, algorithms=["HS256"])

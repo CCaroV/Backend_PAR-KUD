@@ -4,6 +4,7 @@ from cryptography.fernet import Fernet
 
 
 def encrypt_dict(diccionario,clave):
+    print(Fernet.generate_key())
     # Crear la clave de cifrado de Fernet
     clave_fernet = Fernet(clave)
 
