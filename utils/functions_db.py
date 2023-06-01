@@ -1,8 +1,11 @@
+import base64
+from os import getenv
+
 import psycopg2
 from flask import Flask, json, Request
 
-from utils.function_jwt import get_data
 from utils.encrypter import decrypt_dict
+from utils.function_jwt import get_data
 
 app = Flask(__name__)
 
@@ -15,7 +18,8 @@ def loadFileConfig():
 
 def conectarBD(request: Request):
     token = request.headers['Authorization'].split(" ")[1]
-    data = decrypt_dict(get_data(token))
+    key = base64.urlsafe_b64encode("0bImZx-AaHdk7E3Aoa6-FS5BKzkIrTc=".encode("utf-8"))
+    data = decrypt_dict(get_data(token),key)
     dataConn = loadFileConfig()
     conn = psycopg2.connect(host=dataConn["host"], port=dataConn["port"], database=dataConn["database"],
                             user=data["user"], password=data["password"])
