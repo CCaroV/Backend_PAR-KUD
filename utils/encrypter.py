@@ -3,7 +3,7 @@ import os
 from cryptography.fernet import Fernet
 
 
-def encrypt_dict(diccionario):
+def encrypt_dict(diccionario,clave):
     clave = base64.urlsafe_b64encode(str(os.getenv("SECRET")).encode('utf-8'))
     # Crear la clave de cifrado de Fernet
     clave_fernet = Fernet(clave)
@@ -26,7 +26,7 @@ def encrypt_dict(diccionario):
     return diccionario_encriptado
 
 
-def decrypt_dict(diccionario_encriptado):
+def decrypt_dict(diccionario_encriptado,clave):
     clave = base64.urlsafe_b64encode(str(os.getenv("SECRET")).encode('utf-8'))
     clave_fernet = Fernet(clave)
 
