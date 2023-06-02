@@ -19,10 +19,18 @@ def loadFileConfig():
 def conectarBD(request: Request):
     token = request.headers['Authorization'].split(" ")[1]
     key = "NwKyZF848xFHInNmjQfY4U4uKTNGhK2ABqgHvolGhuA="
-    data = decrypt_dict(get_data(token),key)
+    data = decrypt_dict(get_data(token), key)
     dataConn = loadFileConfig()
     conn = psycopg2.connect(host=dataConn["host"], port=dataConn["port"], database=dataConn["database"],
                             user=data["user"], password=data["password"])
+    return conn
+
+
+def conectarBDAuth(request: Request):
+    key = "NwKyZF848xFHInNmjQfY4U4uKTNGhK2ABqgHvolGhuA="
+    dataConn = loadFileConfig()
+    conn = psycopg2.connect(host=dataConn["host"], port=dataConn["port"], database=dataConn["database"],
+                            user="parkud_db_admin", password="20181020027")
     return conn
 
 

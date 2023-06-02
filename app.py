@@ -5,7 +5,6 @@ from routes.parking import routes_parking
 from routes.supAdmin import routes_SUser
 from routes.token import routes_token
 from routes.users import *
-from dotenv import load_dotenv, find_dotenv
 
 app = Flask(__name__)
 cors = CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True,
@@ -27,7 +26,4 @@ def test():
 
 
 if __name__ == '__main__':
-    dataConfig = loadFileConfig()
-    print("Server running : " + "http://" + dataConfig["host"] + ":" + str(dataConfig["port"]))
-    load_dotenv(find_dotenv())
     app.run(port=5000)

@@ -19,11 +19,16 @@ def requestDB(dbConn: connection, plPsql: str, par: tuple = ()):
 
             # Extender la lista de diccionarios con los elementos internos
             data.extend(inner_results)
-
+        cursor.close()
+        cerrarBD(dbConn)
         # Devolver la lista de diccionarios como respuesta en formato JSON
         return jsonify(data)
 
-    # Cerrar el cursor y la conexión
+
+
+def requestDBnoReturn(dbConn: connection, plPsql: str, par: tuple = ()):
+    cursor = dbConn.cursor()
+    cursor.callproc(plPsql, par)
     cursor.close()
     cerrarBD(dbConn)
-    return jsonify(results[0][2]), 200
+
