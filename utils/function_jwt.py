@@ -16,7 +16,6 @@ def expire_date(day: int):
 
 def write_token(data: dict):
     key = "NwKyZF848xFHInNmjQfY4U4uKTNGhK2ABqgHvolGhuA="
-    print(key)
     encryptDict = encrypt_dict(data, key)
     token = encode(payload={**encryptDict, "exp": expire_date(1)}, key=key, algorithm="HS256")
     return verifyEncode(token)

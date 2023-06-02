@@ -41,7 +41,6 @@ def get_marcas():
 
         # Ejecutar el procedimiento almacenado
         # cursor.callproc('nombre_procedimiento', parametros)
-        print("SELECT * FROM PARQUEADERO.MARCA_VEHICULO")
         cursor.execute("SELECT * FROM PARQUEADERO.MARCA_VEHICULO")
 
         # Recuperar los resultados, si los hay

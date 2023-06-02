@@ -81,7 +81,7 @@ def cliente_login():
     try:
         info_result = request.get_json()
         DBconn = conectarBDLog(info_result)
-        return requestDBLog(DBconn, 'PARQUEADERO.MOSTRAR_ROL_USUARIO_FU')
+        return requestDB(DBconn, 'PARQUEADERO.MOSTRAR_ROL_USUARIO_FU')
 
     except Exception as e:
         if 'password authentication failed for user' in str(e):

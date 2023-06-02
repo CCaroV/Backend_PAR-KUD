@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 
-from utils.function_general import requestDB
+from utils.function_general import requestDB, requestDBnoReturn
 from utils.function_jwt import validate_token
 from utils.functions_db import *
 
@@ -28,7 +28,6 @@ def get_clienteByid(cliente_id):
 
         # Ejecutar el procedimiento almacenado
         # cursor.callproc('', parametros)
-        print("SELECT * FROM PARQUEADERO.CLIENTE")
         cursor.execute("SELECT * FROM PARQUEADERO.CLIENTE WHERE K_CLIENTE = " + str(cliente_id))
 
         # Recuperar los resultados, si los hay
@@ -109,6 +108,59 @@ def get_vehiculos_tipo():
         )
 
         return requestDB(DBconn, 'MOSTRAR_VEHICULOS_RESERVA_FU', par)
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@routes_user.route("/cliente/registro/vehiculo", methods=['POST'])
+def set_vehicle():
+    try:
+        # Obtener los parámetros del cuerpo de la solicitud
+        info_result = request.get_json()
+
+        # Conectarse a la base de datos PostgreSQL
+        DBconn = conectarBD(request)
+
+        # Parametros del procedimiento o funcion
+        par = (
+            info_result["tipo_vehiculo_p"],
+            info_result["placa_p"],
+            info_result["nombre_1_p"],
+            info_result["nombre_2_p"],
+            info_result["apellido_1_p"],
+            info_result["apellido_2_p"],
+            info_result["marca_vehiculo_p"],
+            info_result["color_vehiculo_p"]
+        )
+        requestDBnoReturn(DBconn, 'PARQUEADERO.AGREGAR_VEHICULO_PR', par)
+        return {'success': "vehicle registered"}, 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@routes_user.route("/cliente/registro/tarjeta", methods=['POST'])
+def set_card():
+    try:
+        # Obtener los parámetros del cuerpo de la solicitud
+        info_result = request.get_json()
+
+        # Conectarse a la base de datos PostgreSQL
+        DBconn = conectarBD(request)
+
+        # Parametros del procedimiento o funcion
+        par = (
+            info_result["nombre_duenio_tarjeta_p"],
+            info_result["apellido_duenio_tarjeta_p"],
+            info_result["numero_tarjeta_p"],
+            info_result["ultimos_cuatro_digitos_p"],
+            info_result["mes_vencimiento_p"],
+            info_result["anio_vencimiento_p"],
+            info_result["tipo_tarjeta_p"]
+        )
+        requestDBnoReturn(DBconn, 'PARQUEADERO.INSERTAR_METODO_PAGO_PR', par)
+        return {'success': "card registered"}, 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
