@@ -2,6 +2,7 @@ from flask_cors import CORS
 
 from routes.Auth import routes_user_auth
 from routes.parking import routes_parking
+from routes.reservas import routes_reserve
 from routes.supAdmin import routes_SUser
 from routes.token import routes_token
 from routes.users import *
@@ -16,7 +17,7 @@ app.register_blueprint(routes_user_auth)
 app.register_blueprint(routes_SUser)
 app.register_blueprint(routes_token)
 app.register_blueprint(routes_parking)
-
+app.register_blueprint(routes_reserve)
 
 @app.route("/", methods=['GET'])
 def test():

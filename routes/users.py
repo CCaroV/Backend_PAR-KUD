@@ -92,27 +92,6 @@ def get_vehiculos():
         return jsonify({'error': str(e)}), 500
 
 
-# Función que devuelve los vehículos de un cliente según el tipo de vehículo.
-@routes_user.route("/cliente/vehiculos/tipo", methods=['POST'])
-def get_vehiculos_tipo():
-    try:
-        # Obtener los parámetros del cuerpo de la solicitud
-        info_result = request.get_json()
-
-        # Conectarse a la base de datos PostgreSQL
-        DBconn = conectarBD(request)
-
-        # Parametros del procedimiento o funcion
-        par = (
-            info_result["tipo_vehiculo_p"]
-        )
-
-        return requestDB(DBconn, 'MOSTRAR_VEHICULOS_RESERVA_FU', par)
-
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
-
 @routes_user.route("/cliente/registro/vehiculo", methods=['POST'])
 def set_vehicle():
     try:
