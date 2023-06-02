@@ -1,7 +1,7 @@
 from flask import jsonify
 from psycopg2._psycopg import connection
 
-from utils.functions_db import cerrarBD
+from utils.functions_db import cerrarBD, guardarCambiosEnBD
 
 
 def requestDB(dbConn: connection, plPsql: str, par: tuple = ()):
@@ -19,6 +19,7 @@ def requestDB(dbConn: connection, plPsql: str, par: tuple = ()):
 
             # Extender la lista de diccionarios con los elementos internos
             data.extend(inner_results)
+        guardarCambiosEnBD(cursor)
         cursor.close()
         cerrarBD(dbConn)
         # Devolver la lista de diccionarios como respuesta en formato JSON
@@ -28,7 +29,9 @@ def requestDB(dbConn: connection, plPsql: str, par: tuple = ()):
 
 def requestDBnoReturn(dbConn: connection, plPsql: str, par: tuple = ()):
     cursor = dbConn.cursor()
-    cursor.callproc(plPsql, par)
+    query = f"CALL {plPsql}{par}"
+    cursor.execute(query)
+    guardarCambiosEnBD(cursor)
     cursor.close()
     cerrarBD(dbConn)
 

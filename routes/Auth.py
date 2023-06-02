@@ -40,6 +40,8 @@ def add_cliente():
         return requestDB(DBconn, 'PARQUEADERO.CREAR_CLIENTE_FU', par)
 
     except Exception as e:
+        if str(e).__contains__("password authentication failed for user"):
+            return 401
         return jsonify({'error': str(e)}), 500
 
 
@@ -49,13 +51,13 @@ def add_cliente_pass():
         # Obtener los parámetros del cuerpo de la solicitud
         info_result = request.get_json()
         # Conectarse a la base de datos PostgreSQL
-        DBconn = conectarBD(request)
+        DBconn = conectarBDAuth(request)
         # Parametros del procedimiento o funcion
         par = (info_result["nombre_usuario_p"],
                info_result["clave_nueva_p"])
         requestDBnoReturn(DBconn, 'PARQUEADERO.PRIMER_CAMBIO_CLAVE_PR', par)
         # Recuperar los resultados, si los hay
-        return 200
+        return jsonify({'success': 'password changed'}), 200
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
