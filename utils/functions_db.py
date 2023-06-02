@@ -34,6 +34,13 @@ def conectarBDAuth(request: Request):
     return conn
 
 
+def conectarBDLog(request: Request):
+    dataConn = loadFileConfig()
+    conn = psycopg2.connect(host=dataConn["host"], port=dataConn["port"], database=dataConn["database"],
+                            user=request['user'], password=request["password"])
+    return conn
+
+
 def cerrarBD(DBconection):
     DBconection.close()
 
