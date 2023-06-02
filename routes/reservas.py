@@ -100,11 +100,27 @@ def get_metodos_pagos():
 
 # 5. Una vez seleccionada el vehículo, sucursal y método de pago, se hace la reserva en la BD.
 @routes_reserve.route("/cliente/reservar", methods=['POST'])
-def set_reserve():
+def set_reserve ():
     try:
+        info_result = request.get_json()
         # Conectarse a la base de datos PostgreSQL
         DBconn = conectarBD(request)
-        requestDBnoReturn(DBconn, 'PARQUEADERO.CREAR_RESERVA_PR')
+        par = (
+            info_result["tipo_vehiculo_p"],
+            info_result["marca_placa_vehiculo_p"],
+            info_result["es_parq_cubierto_p"],
+            info_result["ciudad_p"],
+            info_result["nombre_sucursal_p"],
+            info_result["direccion_sucursal_p"],
+            info_result["fecha_reserva_p"],
+            info_result["hora_reserva_p"],
+            info_result["ultimos_cuatro_digitos_p"],
+            info_result["tipo_tarjeta_p"],
+            info_result["nombre_duenio_tarjeta_p"],
+            info_result["apellido_duenio_tarjeta_p"],
+            info_result["puntos_usados_p"]
+        )
+        requestDBnoReturn(DBconn, 'PARQUEADERO.CREAR_RESERVA_PR',par)
         return {'success': 'successful reservation'}, 200
 
     except Exception as e:
