@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 
-from utils.function_general import requestDB, requestDBnoReturn, requestDBLog
+from utils.function_general import requestDB, requestDBnoReturn
 from utils.function_jwt import validate_token
 from utils.functions_db import conectarBD, conectarBDAuth, conectarBDLog
 from functools import wraps
