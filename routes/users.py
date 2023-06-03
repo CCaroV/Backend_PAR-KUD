@@ -86,7 +86,7 @@ def get_vehiculos():
     try:
         # Conectarse a la base de datos PostgreSQL
         DBconn = conectarBD(request)
-        return requestDB(DBconn, 'MOSTRAR_VEHICULOS_CLIENTE_FU')
+        return requestDB(DBconn, 'PARQUEADERO.MOSTRAR_VEHICULOS_CLIENTE_FU')
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
