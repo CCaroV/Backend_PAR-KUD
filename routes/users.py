@@ -143,3 +143,14 @@ def set_card():
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+
+@routes_user.route("/cliente/reservas", methods=['POST'])
+def get_vehiculos():
+    try:
+        # Conectarse a la base de datos PostgreSQL
+        DBconn = conectarBD(request)
+        return requestDB(DBconn, 'PARQUEADERO.MOSTRAR_RESERVAS_CLIENTE_FU')
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
