@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 
+from utils.Exceptions import verifyExceptions
 from utils.function_general import requestDB
 from utils.function_jwt import validate_token
 from utils.functions_db import conectarBD
@@ -29,7 +30,7 @@ def set_admin():
         return requestDB(DBconn, 'PARQUEADERO.CREAR_ADMIN_FU', par)
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return verifyExceptions(e)
 
 
 @routes_SUser.route("/supAdmin/operador", methods=['POST'])
@@ -49,4 +50,4 @@ def set_operador():
         return requestDB(DBconn, 'PARQUEADERO.CREAR_OPERADOR_FU', par)
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return verifyExceptions(e)

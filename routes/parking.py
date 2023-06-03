@@ -2,6 +2,7 @@ import logging
 
 from flask import Blueprint, request, jsonify
 
+from utils.Exceptions import verifyExceptions
 from utils.function_general import requestDB
 from utils.function_jwt import validate_token
 from utils.functions_db import *
@@ -24,7 +25,7 @@ def get_parqueaderos():
         return requestDB(DBconn, 'PARQUEADERO.MOSTRAR_SUCURSALES_FU')
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return verifyExceptions(e)
 
 
 @routes_parking.route("/cliente/vehiculos/marcas", methods=["GET"])
@@ -54,5 +55,5 @@ def get_marcas():
         return jsonify(results), 200
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return verifyExceptions(e)
 

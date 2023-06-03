@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 
+from utils.Exceptions import verifyExceptions
 from utils.function_general import requestDB, requestDBnoReturn
 from utils.function_jwt import validate_token
 from utils.functions_db import *
@@ -41,7 +42,7 @@ def get_clienteByid(cliente_id):
         return jsonify(results), 200
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return verifyExceptions(e)
 
 
 @routes_user.route("/cliente/<string:emailCliente>", methods=['POST'])
@@ -77,7 +78,7 @@ def post_newClaveCliente(emailCliente):
         return jsonify(results), 200
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return verifyExceptions(e)
 
 
 # Función para mostrar los vehículos que un cliente tiene registrados.
@@ -89,7 +90,7 @@ def get_vehiculos():
         return requestDB(DBconn, 'PARQUEADERO.MOSTRAR_VEHICULOS_CLIENTE_FU')
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return verifyExceptions(e)
 
 
 @routes_user.route("/cliente/registro/vehiculo", methods=['POST'])
@@ -116,7 +117,7 @@ def set_vehicle():
         return {'success': "vehicle registered"}, 200
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return verifyExceptions(e)
 
 
 @routes_user.route("/cliente/registro/tarjeta", methods=['POST'])
@@ -142,7 +143,7 @@ def set_card():
         return {'success': "card registered"}, 200
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return verifyExceptions(e)
 
 
 @routes_user.route("/cliente/reservas", methods=['POST'])

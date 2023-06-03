@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 
+from utils.Exceptions import verifyExceptions
 from utils.function_general import requestDB, requestDBnoReturn
 from utils.function_jwt import validate_token
 from utils.functions_db import conectarBD
@@ -34,7 +35,7 @@ def change_subsidiary_fee():
         return {'success': "fee changed"}, 200
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return verifyExceptions(e)
 
 
 @routes_admin_subsidiaries.route("/admin/sucursal/horario", methods=['POST'])
@@ -60,4 +61,4 @@ def change_subsidiary_schedule():
         return {'success': "fee changed"}, 200
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return verifyExceptions(e)

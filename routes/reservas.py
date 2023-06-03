@@ -1,5 +1,6 @@
 from flask import Blueprint, request, jsonify
 
+from utils.Exceptions import verifyExceptions
 from utils.function_general import requestDB, requestDBnoReturn
 from utils.function_jwt import validate_token
 from utils.functions_db import *
@@ -29,7 +30,7 @@ def get_vehiculos_tipo():
         return requestDB(DBconn, 'PARQUEADERO.MOSTRAR_VEHICULOS_RESERVA_FU', par)
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return verifyExceptions(e)
 
 
 # 2. El cliente escoge la ciudad y sucursal en la que desea reservar. También escoge si el parqueadero debe o no ser
@@ -53,7 +54,7 @@ def get_sucursal():
         return requestDB(DBconn, 'PARQUEADERO.MOSTRAR_INFO_BASICA_SUCURSAL_FU', par)
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return verifyExceptions(e)
 
 
 # -- 3. El usuario selecciona la sucursal en la que desea reservar, la función recibe estos parámetros.
@@ -79,7 +80,7 @@ def get_sucursal_final():
         return requestDB(DBconn, 'PARQUEADERO.MOSTRAR_INFO_SUCURSAL_RESERVA_FU', par)
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return verifyExceptions(e)
 
 
 # 4. Una vez seleccionada la sucursal, el cliente debe seleccionar un método de pago.
@@ -92,7 +93,7 @@ def get_metodos_pagos():
         return requestDB(DBconn, 'PARQUEADERO.MOSTRAR_METODOS_PAGO_FU')
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return verifyExceptions(e)
 
 
 # 5. Una vez seleccionada el vehículo, sucursal y método de pago, se hace la reserva en la BD.
@@ -121,4 +122,4 @@ def set_reserve ():
         return {'success': 'successful reservation'}, 200
 
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        return verifyExceptions(e)
