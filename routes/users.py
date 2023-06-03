@@ -146,7 +146,7 @@ def set_card():
 
 
 @routes_user.route("/cliente/reservas", methods=['POST'])
-def get_vehiculos():
+def get_reserve():
     try:
         # Conectarse a la base de datos PostgreSQL
         DBconn = conectarBD(request)
