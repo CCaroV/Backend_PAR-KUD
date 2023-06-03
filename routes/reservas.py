@@ -25,10 +25,7 @@ def get_vehiculos_tipo():
         DBconn = conectarBD(request)
 
         # Parametros del procedimiento o funcion
-        par = (
-            info_result["tipo_vehiculo_p"]
-        )
-
+        par = (info_result["tipo_vehiculo_p"], "")
         return requestDB(DBconn, 'PARQUEADERO.MOSTRAR_VEHICULOS_RESERVA_FU', par)
 
     except Exception as e:

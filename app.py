@@ -13,11 +13,12 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True,
             expose_headers='Authorization')
 
 app.register_blueprint(routes_user)
+app.register_blueprint(routes_reserve)
 app.register_blueprint(routes_user_auth)
 app.register_blueprint(routes_SUser)
 app.register_blueprint(routes_token)
 app.register_blueprint(routes_parking)
-app.register_blueprint(routes_reserve)
+
 
 @app.route("/", methods=['GET'])
 def test():
