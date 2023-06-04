@@ -1,6 +1,7 @@
 from flask_cors import CORS
 
 from routes.Auth import routes_user_auth
+from routes.audit import routes_audit
 from routes.parking import routes_parking
 from routes.reservas import routes_reserve
 from routes.sucursal import routes_admin_subsidiaries
@@ -20,6 +21,7 @@ app.register_blueprint(routes_SUser)
 app.register_blueprint(routes_token)
 app.register_blueprint(routes_parking)
 app.register_blueprint(routes_admin_subsidiaries)
+app.register_blueprint(routes_audit)
 
 
 @app.route("/", methods=['GET'])
