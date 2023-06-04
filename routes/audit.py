@@ -17,12 +17,10 @@ def verify_token_middleware():
     response = validate_token(token)
 
 
-@routes_audit.route("/auditoria", methods=['GET'])
-def show_audit (cliente_id):
-    def set_card():
-        try:
-            DBconn = conectarBD(request)
-            return requestDB(DBconn, 'AUDITORIA.MOSTRAR_AUDITORIA_FU')
-
-        except Exception as e:
-            return verifyExceptions(e)
+@routes_audit.route("/auditoria", methods=['POST'])
+def show_audit():
+    try:
+        DBconn = conectarBD(request)
+        return requestDB(DBconn, 'AUDITORIA.MOSTRAR_AUDITORIA_FU')
+    except Exception as e:
+        return verifyExceptions(e)

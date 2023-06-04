@@ -5,7 +5,7 @@ from routes.audit import routes_audit
 from routes.parking import routes_parking
 from routes.reservas import routes_reserve
 from routes.sucursal import routes_admin_subsidiaries
-from routes.supAdmin import routes_SUser
+from routes.admin import routes_admin
 from routes.token import routes_token
 from routes.users import *
 
@@ -17,7 +17,7 @@ cors = CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True,
 app.register_blueprint(routes_user)
 app.register_blueprint(routes_reserve)
 app.register_blueprint(routes_user_auth)
-app.register_blueprint(routes_SUser)
+app.register_blueprint(routes_admin)
 app.register_blueprint(routes_token)
 app.register_blueprint(routes_parking)
 app.register_blueprint(routes_admin_subsidiaries)
